@@ -63,7 +63,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.lumina.studio.engine.RealMediaManager
+import com.lumina.studio.engine.media.RealMediaManager
 import com.lumina.studio.ui.theme.AudioTrackColor
 import com.lumina.studio.ui.theme.CyberGold
 import com.lumina.studio.ui.theme.ElectricCyan

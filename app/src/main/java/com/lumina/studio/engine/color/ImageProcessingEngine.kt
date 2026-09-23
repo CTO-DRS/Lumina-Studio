@@ -1,4 +1,4 @@
-package com.lumina.studio.engine
+package com.lumina.studio.engine.color
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory

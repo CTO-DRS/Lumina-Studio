@@ -1,4 +1,4 @@
-package com.lumina.studio.engine
+package com.lumina.studio.engine.media
 
 import android.content.ContentValues
 import android.content.Context
@@ -23,6 +23,7 @@ import java.io.File
 import java.io.FileOutputStream
 import java.io.InputStream
 import java.io.OutputStream
+import com.lumina.studio.engine.color.ColorMatrixEngine
 
 data class VideoMetadata(
   val title: String,

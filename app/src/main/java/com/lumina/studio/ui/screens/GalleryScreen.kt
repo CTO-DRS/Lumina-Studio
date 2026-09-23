@@ -79,10 +79,10 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.SubcomposeAsyncImage
 import coil.request.ImageRequest
 import com.lumina.studio.data.model.MediaType
-import com.lumina.studio.ui.GalleryFilter
-import com.lumina.studio.ui.GalleryMediaItem
-import com.lumina.studio.ui.GallerySortOrder
-import com.lumina.studio.ui.GalleryViewModel
+import com.lumina.studio.ui.viewmodels.GalleryFilter
+import com.lumina.studio.ui.viewmodels.GalleryMediaItem
+import com.lumina.studio.ui.viewmodels.GallerySortOrder
+import com.lumina.studio.ui.viewmodels.GalleryViewModel
 import com.lumina.studio.ui.theme.CyberGold
 import com.lumina.studio.ui.theme.ElectricCyan
 import com.lumina.studio.ui.theme.EmeraldGreen

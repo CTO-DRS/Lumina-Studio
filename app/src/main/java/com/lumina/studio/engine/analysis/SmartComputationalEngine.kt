@@ -1,10 +1,11 @@
-package com.lumina.studio.engine
+package com.lumina.studio.engine.analysis
 
 import com.lumina.studio.data.model.TimelineClip
 import com.lumina.studio.data.model.TrackType
 import kotlin.math.abs
 import kotlin.math.cos
 import kotlin.math.roundToInt
+import com.lumina.studio.engine.audio.AudioGraphEngine
 
 /**
  * Smart computational engine — REAL analysis edition.

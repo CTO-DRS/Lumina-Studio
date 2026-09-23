@@ -9,7 +9,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import com.lumina.studio.ui.MainAppScreen
-import com.lumina.studio.ui.StudioViewModel
+import com.lumina.studio.ui.viewmodels.StudioViewModel
 import com.lumina.studio.ui.theme.MyApplicationTheme
 import com.lumina.studio.ui.theme.ObsidianBg
 

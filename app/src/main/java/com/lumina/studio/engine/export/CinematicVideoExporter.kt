@@ -1,4 +1,4 @@
-package com.lumina.studio.engine
+package com.lumina.studio.engine.export
 
 import android.content.Context
 import android.graphics.Bitmap
@@ -29,6 +29,7 @@ import java.nio.ByteOrder
 import java.nio.FloatBuffer
 import kotlin.math.max
 import kotlin.math.min
+import com.lumina.studio.engine.color.ColorMatrixEngine
 
 /**
  * REAL on-device video export pipeline.

@@ -1,4 +1,4 @@
-package com.lumina.studio.ui
+package com.lumina.studio.ui.editor
 
 import android.content.Context
 import com.lumina.studio.data.model.EditorMode

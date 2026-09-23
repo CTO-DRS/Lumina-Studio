@@ -1,21 +1,18 @@
-# Add project specific ProGuard rules here.
-# You can control the set of applied configuration files using the
-# proguardFiles setting in build.gradle.
-#
-# For more details, see
-#   http://developer.android.com/guide/developing/tools/proguard.html
+# ============================================================
+# Lumina Studio — R8 / ProGuard configuration
+# Organized by concern. Nothing here is required for correctness
+# of the engine layer (no reflection-based access anywhere);
+# rules below only improve release diagnostics.
+# ============================================================
 
-# If your project uses WebView with JS, uncomment the following
-# and specify the fully qualified class name to the JavaScript interface
-# class:
+# --- Readable release stack traces ---------------------------
+-keepattributes SourceFile,LineNumberTable
+-renamesourcefileattribute SourceFile
+
+# --- Kotlin metadata (required by coroutines/Room tooling) ---
+-keepattributes RuntimeVisibleAnnotations,AnnotationDefault
+
+# --- WebView JS interfaces (none in this app; kept as doc) ---
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
-
-# Uncomment this to preserve the line number information for
-# debugging stack traces.
-#-keepattributes SourceFile,LineNumberTable
-
-# If you keep the line number information, uncomment this to
-# hide the original source file name.
-#-renamesourcefileattribute SourceFile

@@ -66,7 +66,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.lumina.studio.data.model.AdjustmentsState
 import com.lumina.studio.data.model.EditorStudioType
-import com.lumina.studio.engine.SmartComputationalEngine
+import com.lumina.studio.engine.analysis.SmartComputationalEngine
 import com.lumina.studio.ui.theme.AudioTrackColor
 import com.lumina.studio.ui.theme.CyberGold
 import com.lumina.studio.ui.theme.ElectricCyan

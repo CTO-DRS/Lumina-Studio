@@ -1,4 +1,4 @@
-package com.lumina.studio.ui
+package com.lumina.studio.ui.viewmodels
 
 import android.app.Application
 import android.graphics.BitmapFactory

@@ -71,9 +71,9 @@ import androidx.compose.ui.unit.sp
 import com.lumina.studio.data.model.AdjustmentsState
 import com.lumina.studio.data.model.CropAspect
 import com.lumina.studio.data.model.ProjectEntity
-import com.lumina.studio.engine.ColorMatrixEngine
-import com.lumina.studio.engine.RealMediaManager
-import com.lumina.studio.engine.VisualEffectsEngine
+import com.lumina.studio.engine.color.ColorMatrixEngine
+import com.lumina.studio.engine.media.RealMediaManager
+import com.lumina.studio.engine.color.VisualEffectsEngine
 import com.lumina.studio.ui.theme.CyberGold
 import com.lumina.studio.ui.theme.ElectricCyan
 import com.lumina.studio.ui.theme.NeonViolet

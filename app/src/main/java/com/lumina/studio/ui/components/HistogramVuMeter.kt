@@ -31,8 +31,8 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.lumina.studio.engine.AudioGraphEngine
-import com.lumina.studio.engine.MediaAnalysisEngine
+import com.lumina.studio.engine.audio.AudioGraphEngine
+import com.lumina.studio.engine.analysis.MediaAnalysisEngine
 import com.lumina.studio.ui.theme.EmeraldGreen
 import com.lumina.studio.ui.theme.ObsidianBorder
 import com.lumina.studio.ui.theme.ObsidianSurface
