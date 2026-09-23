@@ -1,13 +1,13 @@
-package com.lumina.studio
+package com.lumina.studio.engine.analysis
 
 import com.lumina.studio.data.model.AdjustmentsState
 import com.lumina.studio.data.model.CropAspect
 import com.lumina.studio.data.model.TimelineClip
 import com.lumina.studio.data.model.TrackType
-import com.lumina.studio.engine.AudioGraphEngine
-import com.lumina.studio.engine.FrameAccurateTimecodeEngine
-import com.lumina.studio.engine.MediaAnalysisEngine
-import com.lumina.studio.engine.SmartComputationalEngine
+import com.lumina.studio.engine.audio.AudioGraphEngine
+import com.lumina.studio.engine.analysis.FrameAccurateTimecodeEngine
+import com.lumina.studio.engine.analysis.MediaAnalysisEngine
+import com.lumina.studio.engine.analysis.SmartComputationalEngine
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertTrue

@@ -1,4 +1,4 @@
-package com.lumina.studio
+package com.lumina.studio.engine.color
 
 import android.content.Context
 import android.graphics.Bitmap
@@ -12,13 +12,13 @@ import com.lumina.studio.data.model.toAdjustmentsState
 import com.lumina.studio.data.model.toSessionEntity
 import com.lumina.studio.data.repository.ProjectRepository
 import com.lumina.studio.data.repository.SessionRepository
-import com.lumina.studio.engine.AudioGraphEngine
-import com.lumina.studio.engine.ColorMatrixEngine
-import com.lumina.studio.engine.ImageProcessingEngine
-import com.lumina.studio.engine.MediaAnalysisEngine
-import com.lumina.studio.engine.ShareExporter
-import com.lumina.studio.engine.SfxSynthesizer
-import com.lumina.studio.engine.SmartComputationalEngine
+import com.lumina.studio.engine.audio.AudioGraphEngine
+import com.lumina.studio.engine.color.ColorMatrixEngine
+import com.lumina.studio.engine.color.ImageProcessingEngine
+import com.lumina.studio.engine.analysis.MediaAnalysisEngine
+import com.lumina.studio.engine.export.ShareExporter
+import com.lumina.studio.engine.audio.SfxSynthesizer
+import com.lumina.studio.engine.analysis.SmartComputationalEngine
 import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Assert.assertEquals

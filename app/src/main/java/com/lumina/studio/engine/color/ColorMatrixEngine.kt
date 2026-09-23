@@ -1,4 +1,4 @@
-package com.lumina.studio.engine
+package com.lumina.studio.engine.color
 
 import androidx.compose.ui.graphics.ColorMatrix
 import com.lumina.studio.data.model.AdjustmentsState

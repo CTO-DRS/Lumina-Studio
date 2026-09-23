@@ -89,9 +89,9 @@ import androidx.compose.ui.window.DialogProperties
 import com.lumina.studio.R
 import com.lumina.studio.data.model.AdjustmentsState
 import com.lumina.studio.data.model.FilterPreset
-import com.lumina.studio.engine.ColorMatrixEngine
-import com.lumina.studio.engine.SfxSynthesizer
-import com.lumina.studio.ui.StudioViewModel
+import com.lumina.studio.engine.color.ColorMatrixEngine
+import com.lumina.studio.engine.audio.SfxSynthesizer
+import com.lumina.studio.ui.viewmodels.StudioViewModel
 import com.lumina.studio.ui.theme.AudioTrackColor
 import com.lumina.studio.ui.theme.CyberGold
 import com.lumina.studio.ui.theme.ElectricCyan

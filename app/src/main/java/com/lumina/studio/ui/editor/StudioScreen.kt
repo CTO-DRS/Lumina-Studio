@@ -1,4 +1,4 @@
-package com.lumina.studio.ui
+package com.lumina.studio.ui.editor
 
 import android.widget.Toast
 import androidx.compose.animation.AnimatedContent
@@ -61,7 +61,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontFamily
-import com.lumina.studio.engine.AudioGraphEngine
+import com.lumina.studio.engine.audio.AudioGraphEngine
 import com.lumina.studio.data.model.TrackType
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -102,6 +102,7 @@ import com.lumina.studio.ui.theme.SunsetCoral
 import com.lumina.studio.ui.theme.TextMuted
 import com.lumina.studio.ui.theme.TextPrimary
 import com.lumina.studio.ui.theme.TextSecondary
+import com.lumina.studio.ui.viewmodels.StudioViewModel
 
 enum class StudioActiveTool(
   val labelAr: String,

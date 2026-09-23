@@ -1,18 +1,29 @@
+# Gradle
 *.iml
 .gradle
 .kotlin
 /local.properties
-/.idea/caches
-/.idea/libraries
-/.idea/modules.xml
-/.idea/workspace.xml
-/.idea/navEditor.xml
-/.idea/assetWizardSettings.xml
+.idea
 .DS_Store
 /build
 /captures
 .externalNativeBuild
 .cxx
+
+# Local environment — never commit
 local.properties
 .env
+
+# Signing material — never commit (a fallback debug keystore is auto-provisioned)
 debug.keystore
+*.jks
+*.keystore
+
+# Build artifacts (delivered via GitHub Releases, not the repo)
+*.apk
+*.aab
+*.hprof
+
+# OS junk
+**/.DS_Store
+Thumbs.db

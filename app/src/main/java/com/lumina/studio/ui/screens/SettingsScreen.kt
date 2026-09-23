@@ -47,8 +47,8 @@ import androidx.compose.ui.unit.sp
 import com.lumina.studio.data.model.EditorMode
 import com.lumina.studio.data.model.ExportCodec
 import com.lumina.studio.data.model.VideoResolution
-import com.lumina.studio.ui.StudioPreferences
-import com.lumina.studio.ui.StudioViewModel
+import com.lumina.studio.ui.editor.StudioPreferences
+import com.lumina.studio.ui.viewmodels.StudioViewModel
 import com.lumina.studio.ui.theme.CyberGold
 import com.lumina.studio.ui.theme.ElectricCyan
 import com.lumina.studio.ui.theme.EmeraldGreen

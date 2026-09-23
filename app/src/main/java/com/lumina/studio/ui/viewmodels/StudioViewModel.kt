@@ -1,4 +1,4 @@
-package com.lumina.studio.ui
+package com.lumina.studio.ui.viewmodels
 
 import android.app.Application
 import android.content.Context
@@ -25,15 +25,15 @@ import com.lumina.studio.data.model.toAdjustmentsState
 import com.lumina.studio.data.model.toSessionEntity
 import com.lumina.studio.data.repository.ProjectRepository
 import com.lumina.studio.data.repository.SessionRepository
-import com.lumina.studio.engine.AudioGraphEngine
-import com.lumina.studio.engine.CinematicVideoExporter
-import com.lumina.studio.engine.MediaAnalysisEngine
-import com.lumina.studio.engine.PreviewAudioController
-import com.lumina.studio.engine.RealMediaManager
-import com.lumina.studio.engine.SaveResult
-import com.lumina.studio.engine.SfxSynthesizer
-import com.lumina.studio.engine.SmartComputationalEngine
-import com.lumina.studio.engine.FrameAccurateTimecodeEngine
+import com.lumina.studio.engine.audio.AudioGraphEngine
+import com.lumina.studio.engine.export.CinematicVideoExporter
+import com.lumina.studio.engine.analysis.MediaAnalysisEngine
+import com.lumina.studio.engine.audio.PreviewAudioController
+import com.lumina.studio.engine.media.RealMediaManager
+import com.lumina.studio.engine.media.SaveResult
+import com.lumina.studio.engine.audio.SfxSynthesizer
+import com.lumina.studio.engine.analysis.SmartComputationalEngine
+import com.lumina.studio.engine.analysis.FrameAccurateTimecodeEngine
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -47,6 +47,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.File
 import kotlin.math.roundToInt
+import com.lumina.studio.ui.editor.StudioPreferences
 
 class StudioViewModel(application: Application) : AndroidViewModel(application) {
 

@@ -27,6 +27,8 @@ import com.lumina.studio.ui.screens.GalleryScreen
 import com.lumina.studio.ui.screens.ProjectsScreen
 import com.lumina.studio.ui.screens.SettingsScreen
 import com.lumina.studio.ui.theme.ObsidianBg
+import com.lumina.studio.ui.editor.StudioScreen
+import com.lumina.studio.ui.viewmodels.StudioViewModel
 
 @Composable
 fun MainAppScreen(

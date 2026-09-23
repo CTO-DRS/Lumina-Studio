@@ -102,7 +102,7 @@ import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import androidx.core.content.ContextCompat
 import com.lumina.studio.data.model.MediaType
-import com.lumina.studio.engine.ImageProcessingEngine
+import com.lumina.studio.engine.color.ImageProcessingEngine
 import com.lumina.studio.ui.theme.CyberGold
 import com.lumina.studio.ui.theme.ElectricCyan
 import com.lumina.studio.ui.theme.EmeraldGreen

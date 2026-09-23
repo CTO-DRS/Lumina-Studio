@@ -69,7 +69,7 @@ import androidx.compose.ui.unit.sp
 import com.lumina.studio.data.model.FilterPreset
 import com.lumina.studio.data.model.TimelineClip
 import com.lumina.studio.data.model.TrackType
-import com.lumina.studio.engine.FrameAccurateTimecodeEngine
+import com.lumina.studio.engine.analysis.FrameAccurateTimecodeEngine
 import com.lumina.studio.ui.theme.AudioTrackColor
 import com.lumina.studio.ui.theme.CyberGold
 import com.lumina.studio.ui.theme.EffectTrackColor
