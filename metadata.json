@@ -1,6 +1,0 @@
-{
-  "name": "Lumina Studio",
-  "description": "2027 Pro Photo & 4K Video Editor with advanced visual effects, color grading, multi-track timeline, and social export.",
-  "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
-}
