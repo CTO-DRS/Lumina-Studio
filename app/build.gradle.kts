@@ -18,9 +18,13 @@ android {
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
   }
 
+  // Real signing setup: use the project-local debug keystore when present and
+  // otherwise fall back to the standard auto-provisioned debug keystore, so a
+  // fresh clone builds out of the box without committing secret material.
+  val localDebugKeystore = rootDir.resolve("debug.keystore")
   signingConfigs {
     create("debugConfig") {
-      storeFile = file("${rootDir}/debug.keystore")
+      storeFile = localDebugKeystore
       storePassword = "android"
       keyAlias = "androiddebugkey"
       keyPassword = "android"
@@ -36,9 +40,19 @@ android {
       proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
       // Release signing is intentionally not hardcoded: it must come from a
       // real keystore provided at build time, not a committed fake.
-      signingConfig = signingConfigs.getByName("debugConfig")
+      signingConfig = if (localDebugKeystore.exists()) {
+        signingConfigs.getByName("debugConfig")
+      } else {
+        signingConfigs.getByName("debug")
+      }
     }
-    debug { signingConfig = signingConfigs.getByName("debugConfig") }
+    debug {
+      signingConfig = if (localDebugKeystore.exists()) {
+        signingConfigs.getByName("debugConfig")
+      } else {
+        signingConfigs.getByName("debug")
+      }
+    }
   }
   compileOptions {
     sourceCompatibility = JavaVersion.VERSION_11

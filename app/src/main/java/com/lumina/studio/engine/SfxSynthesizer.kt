@@ -83,7 +83,7 @@ object SfxSynthesizer {
   fun getEnvelope(context: Context, id: String): AudioGraphEngine.AudioEnvelope? {
     envelopeCache[id]?.let { return it }
     val pcm = getPcm(context, id) ?: return null
-    val windowSamples = SAMPLE_RATE * 40L / 1000L
+    val windowSamples = (SAMPLE_RATE * 40L / 1000L).toInt()
     val windows = (pcm.size / windowSamples).coerceAtLeast(1)
     val rms = FloatArray(windows)
     var peak = 0f
@@ -267,7 +267,7 @@ object SfxSynthesizer {
       val inTickWindow = i % tickPeriod < 260
       val tick = if (inTickWindow) (rnd.nextFloat() * 2f - 1f) * 0.5f * exp(-(i % tickPeriod) / 60f) else 0f
       lp += 0.4f * (tick - lp)
-      val wobble = 1f + 0.08f * sin(2.0 * PI * 0.9 * t * 8.0)
+      val wobble = (1f + 0.08f * sin(2.0 * PI * 0.9 * t * 8.0)).toFloat()
       out[i] = (hum + lp * 1.4f) * 0.8f * wobble
     }
     return out
@@ -351,7 +351,7 @@ object SfxSynthesizer {
         nextCrackle = i + (SAMPLE_RATE * (0.02f + rnd.nextFloat() * 0.12f)).toInt()
       }
       crackleLp += 0.5f * (out[i] - crackleLp)
-      val wobble = 1f + 0.05f * sin(2.0 * PI * 0.33 * t * 6.0)
+      val wobble = (1f + 0.05f * sin(2.0 * PI * 0.33 * t * 6.0)).toFloat()
       out[i] = crackleLp * 1.1f + hissHi[i] * 0.12f * wobble
     }
     return out

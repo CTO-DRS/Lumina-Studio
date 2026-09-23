@@ -16,6 +16,7 @@ import android.opengl.EGLContext
 import android.opengl.EGLDisplay
 import android.opengl.EGLExt
 import android.opengl.EGLSurface
+import android.opengl.GLES11Ext
 import android.opengl.GLES20
 import android.opengl.GLUtils
 import android.view.Surface
@@ -286,10 +287,10 @@ object CinematicVideoExporter {
           if (firstPtsUs < 0) firstPtsUs = ptsUs
           lastPtsUs = ptsUs
           publishProgress(onProgress, framesWritten, estimatedTotalFrames, startWallMs, "ترميز إطارات المشروع")
-          drainEncoder(encoder!!, bufferInfo, muxer, ::startMuxerIfNeeded, maxDrain = false)
+          drainEncoder(encoder!!, bufferInfo, muxer, ::startMuxerIfNeeded, videoTrackIndexProvider = { videoTrackIndex }, maxDrain = false)
           ptsUs += frameDurUs
         }
-        drainEncoder(encoder!!, bufferInfo, muxer, ::startMuxerIfNeeded, maxDrain = true)
+        drainEncoder(encoder!!, bufferInfo, muxer, ::startMuxerIfNeeded, videoTrackIndexProvider = { videoTrackIndex }, maxDrain = true)
       } else {
         // ----------------------------------------------------------
         // Real video: decode → grade → encode, honouring the trim range
@@ -350,7 +351,7 @@ object CinematicVideoExporter {
                 lastPtsUs = ptsUs
                 framesWritten++
                 publishProgress(onProgress, framesWritten, estimatedTotalFrames, startWallMs, "معالجة وتسريع الإطارات")
-                drainEncoder(encoder!!, bufferInfo, muxer, ::startMuxerIfNeeded, maxDrain = false)
+                drainEncoder(encoder!!, bufferInfo, muxer, ::startMuxerIfNeeded, videoTrackIndexProvider = { videoTrackIndex }, maxDrain = false)
               } else {
                 decoder!!.releaseOutputBuffer(outIdx, false)
               }
@@ -369,7 +370,7 @@ object CinematicVideoExporter {
             consecutiveTimeouts = 0
           }
         }
-        drainEncoder(encoder!!, bufferInfo, muxer, ::startMuxerIfNeeded, maxDrain = true)
+        drainEncoder(encoder!!, bufferInfo, muxer, ::startMuxerIfNeeded, videoTrackIndexProvider = { videoTrackIndex }, maxDrain = true)
       }
 
       if (framesWritten == 0) {
@@ -534,6 +535,7 @@ object CinematicVideoExporter {
     bufferInfo: MediaCodec.BufferInfo,
     muxer: MediaMuxer?,
     startMuxerIfNeeded: (MediaFormat) -> Unit,
+    videoTrackIndexProvider: () -> Int,
     maxDrain: Boolean
   ) {
     while (true) {
@@ -542,10 +544,11 @@ object CinematicVideoExporter {
         muxer?.let { startMuxerIfNeeded(encoder.outputFormat) }
       } else if (outIdx >= 0) {
         val encoded = encoder.getOutputBuffer(outIdx)
-        if (encoded != null && bufferInfo.size > 0 && muxer != null && videoTrackIndex >= 0) {
+        val trackIndex = videoTrackIndexProvider()
+        if (encoded != null && bufferInfo.size > 0 && muxer != null && trackIndex >= 0) {
           encoded.position(bufferInfo.offset)
           encoded.limit(bufferInfo.offset + bufferInfo.size)
-          muxer.writeSampleData(videoTrackIndex, encoded, bufferInfo)
+          muxer.writeSampleData(trackIndex, encoded, bufferInfo)
         }
         encoder.releaseOutputBuffer(outIdx, false)
         if (bufferInfo.flags and MediaCodec.BUFFER_FLAG_END_OF_STREAM != 0) {
@@ -801,9 +804,9 @@ object CinematicVideoExporter {
     }
 
     fun drawVideoFrame(textureId: Int, texMatrix: FloatArray) {
-      GLES20.glBindTexture(GLES20.GL_TEXTURE_EXTERNAL_OES, textureId)
+      GLES20.glBindTexture(GLES11Ext.GL_TEXTURE_EXTERNAL_OES, textureId)
       drawCommon(texMatrix)
-      GLES20.glBindTexture(GLES20.GL_TEXTURE_EXTERNAL_OES, 0)
+      GLES20.glBindTexture(GLES11Ext.GL_TEXTURE_EXTERNAL_OES, 0)
     }
 
     fun drawBitmapFrame() {

@@ -148,7 +148,7 @@ object VisualEffectsEngine {
   ) {
     if (overlay == null || overlay.width <= 0 || overlay.height <= 0) return
     val image = overlay.asImageBitmap()
-    withTransform({
+    scope.withTransform({
       scale(
         scaleX = canvasWidth / overlay.width,
         scaleY = canvasHeight / overlay.height,
@@ -158,9 +158,9 @@ object VisualEffectsEngine {
       drawImage(
         image = image,
         srcOffset = androidx.compose.ui.unit.IntOffset.Zero,
-        srcSize = androidx.compose.ui.geometry.IntSize(overlay.width, overlay.height),
+        srcSize = androidx.compose.ui.unit.IntSize(overlay.width, overlay.height),
         dstOffset = androidx.compose.ui.unit.IntOffset.Zero,
-        dstSize = androidx.compose.ui.geometry.IntSize(overlay.width, overlay.height),
+        dstSize = androidx.compose.ui.unit.IntSize(overlay.width, overlay.height),
         filterQuality = androidx.compose.ui.graphics.FilterQuality.Low
       )
     }
