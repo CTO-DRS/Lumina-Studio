@@ -12,9 +12,7 @@ import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertTrue
 import org.junit.Test
-import kotlin.math.PI
 import kotlin.math.abs
-import kotlin.math.sin
 
 /**
  * Real algorithm unit tests (pure JVM).
@@ -33,7 +31,7 @@ class EngineAnalysisTest {
     val result = SmartComputationalEngine.computeGrayWorldAwb(stats)
     assertEquals(0f, result.recommendedTemp, 1.5f)
     assertEquals(0f, result.recommendedTint, 1.5f)
-    assertEquals(5600, result.estimatedKelvin, 200)
+    assertEquals(5600f, result.estimatedKelvin.toFloat(), 200f)
   }
 
   @Test
@@ -199,13 +197,28 @@ class EngineAnalysisTest {
   @Test
   fun timecodeEngine_smpteFormatting() {
     val tc = FrameAccurateTimecodeEngine.msToTimecode((10 * 60_000 + 5 * 1000 + 250).toLong(), 24)
-    assertEquals("00:10:05:06", tc)
+    assertEquals("00:10:05:06", tc.toSmpteString())
+    assertEquals(0, tc.hours)
+    assertEquals(10, tc.minutes)
+    assertEquals(5, tc.seconds)
+    assertEquals(6, tc.frames)
   }
 
   @Test
   fun timecodeEngine_quantizeToFrame() {
+    // 1035 ms at 30 fps is between frame 31 (≈1033.3 ms) and frame 32:
+    // quantization must snap to a frame boundary within half a frame, and
+    // re-quantizing the snapped value must be idempotent.
     val quantized = FrameAccurateTimecodeEngine.quantizeToFrame(1035L, 30, 60_000)
-    assertEquals(0L, quantized % FrameAccurateTimecodeEngine.frameToMs(1, 30))
+    val halfFrameMs = 500L / 30L + 1
+    assertTrue(
+      "Quantized $quantized ms must sit within half a frame of 1035 ms",
+      abs(quantized - 1035L) <= halfFrameMs
+    )
+    assertEquals(
+      quantized,
+      FrameAccurateTimecodeEngine.quantizeToFrame(quantized, 30, 60_000)
+    )
   }
 
   @Test
@@ -217,8 +230,18 @@ class EngineAnalysisTest {
     val result = FrameAccurateTimecodeEngine.rippleDeleteRangeAcrossTracks(
       clips, startMs = 2_000, endMs = 5_000, totalDurationMs = 10_000, fps = 30
     )
+    // The timeline shrinks by exactly the cut length (3 s), frame-quantized.
     assertEquals(7_000L, result.newTotalDurationMs)
-    assertTrue(result.updatedClips.all { it.durationMs == 7_000L })
+    // A clip straddling the cut is really SPLIT into its preserved head and a
+    // shifted tail (standard NLE ripple-delete semantics), on both tracks.
+    assertEquals(listOf("v1", "v1_post", "a1", "a1_post"), result.updatedClips.map { it.id })
+    val byId = result.updatedClips.associateBy { it.id }
+    assertEquals(0L, byId["v1"]!!.startMs)
+    assertEquals(2_000L, byId["v1"]!!.durationMs)
+    assertEquals(2_000L, byId["v1_post"]!!.startMs)
+    assertEquals(5_000L, byId["v1_post"]!!.durationMs)
+    assertEquals(2_000L, byId["a1"]!!.durationMs)
+    assertEquals(5_000L, byId["a1_post"]!!.durationMs)
   }
 
   // -------------------------------------------------------------------

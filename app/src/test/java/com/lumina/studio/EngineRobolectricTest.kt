@@ -30,6 +30,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
+import org.robolectric.annotation.GraphicsMode
 
 /**
  * Instrumented-logic tests on the JVM via Robolectric.
@@ -38,6 +39,7 @@ import org.robolectric.annotation.Config
  */
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [34])
+@GraphicsMode(GraphicsMode.Mode.NATIVE)
 class EngineRobolectricTest {
 
   private lateinit var context: Context
@@ -91,7 +93,9 @@ class EngineRobolectricTest {
   @Test
   fun toneHistogram_darkBitmap_hasLowMedian() {
     val bmp = Bitmap.createBitmap(64, 64, Bitmap.Config.ARGB_8888)
-    bmp.eraseColor(Color.rgb(20, 20, 20))
+    // True black: luma 0 lands in histogram bin 0, which is exactly what
+    // analyzeTone counts as crushed shadows.
+    bmp.eraseColor(Color.BLACK)
     val tone = MediaAnalysisEngine.analyzeTone(bmp)
     assertTrue("Median of a dark frame must be low, got ${tone.p50}", tone.p50 < 40)
     assertTrue("Dark frame must have crushed shadows", tone.crushedShadowsRatio > 0.5f)
