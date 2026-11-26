@@ -37,6 +37,32 @@ jobs:
       - name: Run unit tests
         run: ./gradlew :app:testDebugUnitTest --stacktrace
 
+      - name: Build signed release APK (only when signing secrets are set)
+        id: signed
+        continue-on-error: true
+        if: github.event_name != 'pull_request'
+        env:
+          KS_B64: ${{ secrets.LUMINA_KEYSTORE_BASE64 }}
+          RELEASE_KEYSTORE_PASSWORD: ${{ secrets.LUMINA_KEYSTORE_PASSWORD }}
+          RELEASE_KEY_ALIAS: ${{ secrets.LUMINA_KEY_ALIAS }}
+          RELEASE_KEY_PASSWORD: ${{ secrets.LUMINA_KEY_PASSWORD }}
+        run: |
+          if [ -z "$KS_B64" ]; then echo "Signing secrets not set: skipping signed release build."; exit 0; fi
+          echo "$KS_B64" | base64 -d > "$RUNNER_TEMP/release.keystore"
+          chmod 600 "$RUNNER_TEMP/release.keystore"
+          export RELEASE_KEYSTORE_PATH="$RUNNER_TEMP/release.keystore"
+          ./gradlew :app:assembleRelease --no-daemon --stacktrace
+          APKSIGNER=$(ls "$ANDROID_HOME"/build-tools/*/apksigner 2>/dev/null | tail -1)
+          if [ -n "$APKSIGNER" ]; then for f in app/build/outputs/apk/release/*.apk; do "$APKSIGNER" verify --print-certs "$f" | grep -i 'SHA-256'; done; fi
+          rm -f "$RUNNER_TEMP/release.keystore"
+      - name: Upload signed release APK
+        if: github.event_name != 'pull_request'
+        uses: actions/upload-artifact@v4
+        with:
+          name: signed-release-apk
+          path: app/build/outputs/apk/release/*.apk
+          if-no-files-found: ignore
+
       - name: Upload test results
         if: always()
         uses: actions/upload-artifact@v4
